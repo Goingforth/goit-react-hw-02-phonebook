@@ -1,11 +1,10 @@
 import { List } from './List.styled';
+import ContactItem from 'components/App/ContactItem/ContactItem';
 const ContactList = ({ contacts }) => {
   return (
     <List>
       {contacts.map(({ id, name, number }) => (
-        <li key={id}>
-          {name}: {number}
-        </li>
+        <ContactItem key={id} name={name} number={number} />
       ))}
     </List>
   );
