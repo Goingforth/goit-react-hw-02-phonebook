@@ -1,6 +1,7 @@
 import { List } from './List.styled';
 import ContactItem from 'components/App/ContactItem/ContactItem';
 const ContactList = ({ contacts, onDeleteContact }) => {
+  console.log(contacts);
   return (
     <List>
       {contacts.map(({ id, name, number }) => (

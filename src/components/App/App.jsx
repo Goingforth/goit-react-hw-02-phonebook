@@ -2,6 +2,7 @@ import React from 'react';
 import { nanoid } from 'nanoid';
 import ContactForm from 'components/ContactForm/ContactForm';
 import { Container } from './Container.styled';
+import Filter from 'components/Filter/Filter';
 import ContactList from 'components/ContactList/ContactList';
 class App extends React.Component {
   state = {
@@ -20,13 +21,24 @@ class App extends React.Component {
       ...data,
     };
     const contactsName = this.state.contacts.map(el => el.name);
-    contactsName.includes(data.name)
-      ? alert(`${data.name} is already in contacts`)
+    const name = data.name;
+    contactsName.includes(name)
+      ? alert(`${name} is already in contacts`)
       : this.setState(prevState => {
           return {
             contacts: prevState.contacts.concat(newContact),
           };
         });
+  };
+
+  updateFilter = evt => {
+    this.setState({ filter: evt.target.value });
+  };
+
+  newContacts = () => {
+    return this.state.contacts.filter(el =>
+      el.name.toLowerCase().includes(this.state.filter.toLowerCase())
+    );
   };
 
   deleteContact = id => {
@@ -36,15 +48,17 @@ class App extends React.Component {
   };
 
   render() {
+    const filteredContacts = this.newContacts();
     return (
       <Container>
         <h1>Phonebook</h1>
         <ContactForm createContact={this.createContact} />
 
         <h2>Contacts </h2>
-        {/* <Filter />  */}
+
+        <Filter handleChange={this.updateFilter} value={this.state.filter} />
         <ContactList
-          contacts={this.state.contacts}
+          contacts={filteredContacts}
           onDeleteContact={this.deleteContact}
         />
       </Container>
