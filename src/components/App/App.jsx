@@ -19,12 +19,14 @@ class App extends React.Component {
       id: nanoid(),
       ...data,
     };
-
-    this.setState(prevState => {
-      return {
-        contacts: prevState.contacts.concat(newContact),
-      };
-    });
+    const contactsName = this.state.contacts.map(el => el.name);
+    contactsName.includes(data.name)
+      ? alert(`${data.name} is already in contacts`)
+      : this.setState(prevState => {
+          return {
+            contacts: prevState.contacts.concat(newContact),
+          };
+        });
   };
 
   deleteContact = id => {
