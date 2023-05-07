@@ -7,3 +7,9 @@ export const List = styled.ul`
   font-size: 16px;
   font-weight: 500;
 `;
+
+export const Message = styled.p`
+  font-size: 24px;
+  font-weight: 500;
+  color: red;
+`;

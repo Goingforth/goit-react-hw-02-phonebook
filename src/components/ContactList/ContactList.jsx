@@ -1,18 +1,21 @@
-import { List } from './List.styled';
+import { List, Message } from './List.styled';
 import ContactItem from 'components/App/ContactItem/ContactItem';
 const ContactList = ({ contacts, onDeleteContact }) => {
-  console.log(contacts);
   return (
     <List>
-      {contacts.map(({ id, name, number }) => (
-        <ContactItem
-          key={id}
-          id={id}
-          name={name}
-          number={number}
-          onDeleteContact={onDeleteContact}
-        />
-      ))}
+      {contacts.length > 0 ? (
+        contacts.map(({ id, name, number }) => (
+          <ContactItem
+            key={id}
+            id={id}
+            name={name}
+            number={number}
+            onDeleteContact={onDeleteContact}
+          />
+        ))
+      ) : (
+        <Message>No contacts in phonebook.</Message>
+      )}
     </List>
   );
 };
